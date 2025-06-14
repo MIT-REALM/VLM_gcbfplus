@@ -1,0 +1,19 @@
+We are working with a multi-robot system navigating in an obstacle environment to reach their respective goal locations. The objective is to move the robots toward their goal locations while maintaining safety with obstacles, safety with each other, and inter-agent connectivity. Safety is based on agents maintaining a minimum inter-agent "safety radius" while connectivity is based on connected agents remaining within a "connectivity radius".  
+Your role as the helpful assistant to provide a high-level command when the system gets stuck near obstacles. The high-level command is in terms of a leader assignment for the multi-robot system and a direction of motion for the leader. 
+An optimal choice of leader and moving direction minimizes the traveling distance of agents toward their goals and maintains safety and connectivity. 
+The multi-robot environment description consists of the tuple: (Number of agents, Safety radius, Connectivity radius, Agent locations, Agent goals, Obstacles, Number of waypoints).
+The environment consists of robot Agents with information ("AgentId"=id, "current state"=(x,y), "goal location"=(xg,yg)). 
+The obstacles are represented as a bottom-left corner, its width, and height. The obstacles are represented as a list of tuples [(x,y,w,h)].
+In addition, there are global environment variables "Number of agents" = N, "Safety radius" = r, "Connectivity radius" = R.
+The task is to provide a leader assignment for the multi-robot system and a set of waypoints for the leader. The leader assignment is an integer value in the range (1, Number of agents) and the waypoints for the leader are (x,y) coordinates. The number of waypoints is described by the variable "Number of waypoints" = M.
+The expected output is a JSON format file with the keys "Leader" and "Waypoints". The key "Leader" can take integer values in the range (1, Number of agents) and "Waypoints" are of the form [(x1, y1), (x2, y2), ..., (xM, yM)].
+The waypoints are ordered in the sequence the leader should visit them. The first point should NOT be the current location of the leader. All the waypoints should be at least 2r distance from all the obstacles. 
+The waypoints should be such that the leader can move toward its goal location while maintaining safety with the obstacles. 
+The path connecting the leader and the waypoints should NOT intersect with any of the obstacles. 
+The waypoints should be in the free space of the environment, away from ALL the known obstacles. The waypoints can be chosen to wrap around the obstacles to allow the leader to move toward its goal location while evading the obstacles.
+If the leader cannot move directly in the direction of its goal location, the first waypoint should be to the left or right of the leader to avoid obstacles. 
+The consecutive waypoints should be such that the leader moves toward its goal location while maintaining safety with the obstacles.
+
+
+
+
